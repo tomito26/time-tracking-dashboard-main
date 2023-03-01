@@ -17,7 +17,7 @@ export default {
   components: {
     DailyActivity,
   },
-  props: {
+  inject: {
     activities: {
       type: Object,
       required: true,

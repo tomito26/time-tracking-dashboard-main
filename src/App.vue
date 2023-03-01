@@ -6,15 +6,7 @@
       @show-monthly-cmp="showMonthlyCmp"
       :display-component="displayComponent"
     ></the-header>
-    <daily-activities
-      :activities="activities"
-      v-if="displayComponent === 'daily-activities'"
-    ></daily-activities>
-    <monthly-activities
-      :activities="activities"
-      v-else-if="displayComponent === 'monthly-activities'"
-    ></monthly-activities>
-    <weekly-activities :activities="activities" v-else></weekly-activities>
+    <component :is="displayComponent"></component>
   </div>
 </template>
 
@@ -159,6 +151,11 @@ export default {
           },
         },
       ],
+    };
+  },
+  provide() {
+    return {
+      activities: this.activities,
     };
   },
   methods: {
