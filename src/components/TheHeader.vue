@@ -2,27 +2,27 @@
   <header>
     <div class="profile-details">
       <div class="profile-image">
-        <img :src="image" alt="image-of-jeremy" />
+        <img :src="image" alt="Jeremy Robson" />
       </div>
       <p>Report for <span>Jeremy Robson</span></p>
     </div>
     <nav>
       <ul>
         <li
-          @click="$emit('show-daily-cmp', 'daily-activities')"
-          :class="{ active: displayComponent === 'daily-activities' }"
+          @click="$emit('change-view', 'daily')"
+          :class="{ active: currentView === 'daily' }"
         >
           Daily
         </li>
         <li
-          @click="$emit('show-weekly-cmp', 'weekly-activities')"
-          :class="{ active: displayComponent === 'weekly-activities' }"
+          @click="$emit('change-view', 'weekly')"
+          :class="{ active: currentView === 'weekly' }"
         >
           Weekly
         </li>
         <li
-          @click="$emit('show-monthly-cmp', 'monthly-activities')"
-          :class="{ active: displayComponent === 'monthly-activities' }"
+          @click="$emit('change-view', 'monthly')"
+          :class="{ active: currentView === 'monthly' }"
         >
           Monthly
         </li>
@@ -30,27 +30,13 @@
     </nav>
   </header>
 </template>
+
 <script>
 import profileImage from "../assets/images/image-jeremy.png";
 export default {
-  emits: {
-    "show-daily-cmp": function (cmp) {
-      if (cmp) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    "show-monthly-cmp": function (cmp) {
-      if (cmp) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
+  emits: ["change-view"],
   props: {
-    displayComponent: {
+    currentView: {
       type: String,
       required: true,
     },
@@ -77,7 +63,6 @@ header {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
 .profile-image {
   height: 60px;
   width: 60px;
@@ -125,5 +110,16 @@ nav ul li:active {
 }
 .active {
   color: #fff;
+}
+@media (max-width: 768px) {
+  header {
+    width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+  nav ul {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
 }
 </style>
